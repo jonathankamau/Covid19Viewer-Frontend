@@ -8,7 +8,7 @@ class App extends Component {
     countries: [],
     countryDetails: []
   }
-
+  
   componentDidMount() {
     
     fetch('http://localhost:3000/countries')
@@ -25,12 +25,16 @@ class App extends Component {
   
 
   render() {
+    
     return (
-
+      <div>
       <Countries countries={this.state.countries} />
+      </div>
 
       );
+      
   }
+  
 }
 
 export default App;
