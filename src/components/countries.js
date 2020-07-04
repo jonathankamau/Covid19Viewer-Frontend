@@ -1,12 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
+import CovidViewer from './covidviewer'
 import '../styles/countries.css';
 
-class Countries extends Component {
-
-    state = {
-      countries: [],
-      selectedCountry: ''
-    }
+class Countries extends CovidViewer {
     
     componentDidMount() {
       
