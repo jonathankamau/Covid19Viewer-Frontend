@@ -1,20 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
+import CovidViewer from './covidviewer'
 
-class Countries extends Component {
-
-    state = {
-      countries: [],
-      selectedCountry: ''
-    }
+class Search extends CovidViewer {
     
     componentDidMount() {
       
-      fetch('http://localhost:3000/countries')
+      fetch('http://localhost:3000/searchcountry?search='+this.state.selectedCountry)
       
       .then(res => res.json())
       .then((data) => {
         
-        this.setState({ countries: data })
+        this.setState({ searchCountry: data })
+        console.log(this.state.searchCountry)
+        
         
       })
       
@@ -22,20 +20,24 @@ class Countries extends Component {
     }
 
     render () {
+      if (this.state.searchCountry.region !== "") {
     return (
         
         <div>
-            <center><h1>Countries</h1></center>
+            <center><h1>{this.state.selectedCountry} Stats</h1></center>
             <center>
-                <select id='countries' onChange={(e) => this.setState({selectedCountry: e.target.value})}>
-                    {this.state.countries.map((country) => <option key={country._id}>{country.name}</option>)}
-                </select>
-                <p>The Selected Country is {this.state.selectedCountry}</p>
+                
+                <p>Total Confirmed Cases: {this.state.searchCountry.total_confirmed_cases}</p>
+                <p>Total Deaths: {this.state.searchCountry.total_deaths}</p>
+                <p>Total Recovered: {this.state.searchCountry.total_recovered}</p>
+
             </center>
             
         </div>
+       
         )
+      }
     }
 }
 
-export default Countries;
+export default Search;
